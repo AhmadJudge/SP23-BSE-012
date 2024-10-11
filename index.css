@@ -1,0 +1,40 @@
+/* General Styling for Checkout */
+.checkout-container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #000000;
+}
+
+/* Left Column Scrollable */
+.checkout-left-column {
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Makes the left column scrollable */
+    padding-right: 30px;
+}
+
+/* Right Column: Fixed Order Summary */
+.checkout-right-column {
+    position: sticky;
+    top: 30px; /* Fixes it at the top with some margin */
+}
+
+/* Summary Box Styling */
+.summary {
+    border-radius: 5px;
+}
+
+.summary-pricing p {
+    margin: 0;
+}
+
+.summary-note {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .checkout-left-column, .checkout-right-column {
+        height: auto;
+    }
+}
