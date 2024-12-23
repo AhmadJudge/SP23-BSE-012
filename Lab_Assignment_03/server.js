@@ -34,7 +34,7 @@ app.get("/", async (req, res) => {
   res.render("home", { products });
 });
 
-let connectionString = "mongodb://localhost:27017/sp23-bse-a";
+let connectionString = "mongodb://localhost:27017/database";
 mongoose
   .connect(connectionString)
   .then(() => {
