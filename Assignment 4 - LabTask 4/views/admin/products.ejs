@@ -1,0 +1,152 @@
+<style>
+  @media (max-width: 768px) {
+      td[data-label]:before {
+          content: attr(data-label);
+          font-weight: bold;
+          display: block;
+          text-transform: uppercase;
+          margin-bottom: 5px;
+      }
+      td {
+          display: block;
+          width: 100%;
+      }
+      tr {
+          display: block;
+          margin-bottom: 10px;
+          border: 1px solid #dee2e6;
+          border-radius: 10px;
+          overflow: hidden;
+      }
+      thead {
+          display: none;
+      }
+  }
+</style>
+
+<h3>Products</h3>
+
+<div class="dropdown my-4">
+  <button class="btn btn-primary dropdown-toggle" type="button" id="sortingDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: crimson; border: crimson;">
+    Sort Products
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="sortingDropdown">
+
+    <li><a class="dropdown-item" href="/admin/products/<%= page  %>?sortField=price&sortOrder=asc">Price (Low to High)</a></li>
+    <li><a class="dropdown-item" href="/admin/products/<%= page  %>?sortField=price&sortOrder=desc">Price (High to Low)</a></li>
+  </ul>
+</div>
+<div class="mb-4">
+  <form action="/admin/products/<%= page %>" method="get" class="row g-3">
+    <!-- Search input -->
+    <div class="col-md-4">
+      <input 
+        type="text" 
+        name="q" 
+        class="form-control" 
+        placeholder="Search by title or category..." 
+        value="<%= searchQuery || '' %>"
+      />
+    </div>
+
+    <!-- Category filter -->
+    <div class="col-md-3">
+      <select name="category" class="form-select">
+        <option value="">All Categories</option>
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat._id %>" <%= categoryFilter === cat._id ? 'selected' : '' %>>
+            <%= cat.title %>
+          </option>
+        <% }); %>
+      </select>
+    </div>
+
+    <!-- Featured filter -->
+    <div class="col-md-2">
+      <select name="isFeatured" class="form-select">
+        <option value="">All Products</option>
+        <option value="true" <%= featuredFilter === "true" ? "selected" : "" %>>Featured</option>
+        <option value="false" <%= featuredFilter === "false" ? "selected" : "" %>>Not Featured</option>
+      </select>
+    </div>
+
+    <!-- Submit button -->
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100" style="background-color: crimson; border: crimson;">Filter</button >
+    </div>
+  </form>
+</div>
+
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <!-- Left arrow (only visible if not on the first page) -->
+        <% if (page > 1) { %>
+          <li class="page-item" >
+            <a class="page-link" href="/admin/products/<%= page - 1 %>" style="background-color: crimson; border: crimson;">&laquo;</a>
+          </li>
+        <% } %>
+      
+        <!-- Page numbers -->
+        <% for (let index = 1; index <= totalPages; index++) { %>
+          <% if (totalPages > 3) { %>
+            <% if (index === 1 || index === totalPages || (index >= page - 1 && index <= page + 1)) { %>
+              <li class="page-item <%= index === page ? 'active' : '' %>">
+                <a class="page-link" href="/admin/products/<%= index %>" style="background-color: crimson; border: crimson;"><%= index %></a>
+              </li>
+            <% } else if (index === page - 2 || index === page + 2) { %>
+              <li class="page-item disabled"><span class="page-link" style="background-color: crimson; border: crimson;">...</span></li>
+            <% } %>
+          <% } else { %>
+            <li class="page-item <%= index === page ? 'active' : '' %>">
+              <a class="page-link" href="/admin/products/<%= index %>" style="background-color: crimson; border: crimson;"><%= index %></a>
+            </li>
+          <% } %>
+        <% } %>
+      
+        <!-- Right arrow (only visible if not on the last page) -->
+        <% if (page < totalPages) { %>
+          <li class="page-item">
+            <a class="page-link" href="/admin/products/<%= page + 1 %>"style="background-color: crimson; border: crimson;">&raquo;</a>
+          </li>
+        <% } %>
+      </ul>
+      
+  </nav>
+<a href="/admin/products/create" class="btn btn-info">Create New Product</a>
+<h3 class="mt-5">Products</h3>
+<h3>Total Products: <%= totalRecords %></h3>
+
+<table class="table table-hover table-striped table-responsive-md">
+  <thead class="table-dark">
+    <tr>
+      <th>_id</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Is Featured</th>
+      <th>Category</th>
+      <th>Gender</th>
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach(product => { %>
+      <tr>
+        <td><%= product._id %></td>
+        <td><%= product.title %></td>
+        <td><%= product.description %></td>
+        <td><%= product.price %></td>
+        <td><%= product.isFeatured %></td>
+        <td><%= product.category ? product.category.title : 'No Category' %></td>
+        <td><%= product.gender %></td>
+        <td><img src="/<%= product.picture %>" width="100px" /></td>
+        <td>
+          <a href="/admin/products/edit/<%= product._id %>" class="btn btn-warning">Edit</a>
+          <a href="/admin/products/delete/<%= product._id %>" class="btn btn-danger">Del</a>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
