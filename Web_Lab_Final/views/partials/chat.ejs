@@ -1,0 +1,115 @@
+<style>
+  /* General styles */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+  }
+
+  /* Chat container as a dropdown panel */
+  .chat-container {
+    position: fixed;
+    top: 70px;
+    left: 10px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    background-color: #fff;
+    z-index: 1000;
+  }
+
+  .chat-header {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .chat-body {
+    display: none; /* Initially hidden */
+    padding: 10px;
+  }
+
+  #chat-box {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  #user-message {
+    width: calc(100% - 70px);
+    margin-right: 5px;
+  }
+
+  button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="chat-container">
+  <div class="chat-header" onclick="toggleChat()">Chat with Us</div>
+  <div class="chat-body">
+    <div id="chat-box"></div>
+    <form id="chat-form">
+      <input type="text" id="user-message" placeholder="Type your message..." required />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Toggle chat body visibility
+  function toggleChat() {
+    const chatBody = document.querySelector('.chat-body');
+    chatBody.style.display = chatBody.style.display === 'block' ? 'none' : 'block';
+  }
+
+  // Handle chat form submission
+  document.getElementById('chat-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const userMessage = document.getElementById('user-message').value;
+
+    // Display user message
+    const chatBox = document.getElementById('chat-box');
+    chatBox.innerHTML += `<p><strong>You:</strong> ${userMessage}</p>`;
+
+    // Send request to the server
+    try {
+      const response = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      const data = await response.json();
+
+      // Display AI response
+      chatBox.innerHTML += `<p><strong>AI:</strong> ${data.response}</p>`;
+      chatBox.scrollTop = chatBox.scrollHeight;
+    } catch (err) {
+      console.error('Error:', err);
+      chatBox.innerHTML += `<p><strong>Error:</strong> Could not connect to AI.</p>`;
+    }
+
+    document.getElementById('user-message').value = '';
+  });
+</script>

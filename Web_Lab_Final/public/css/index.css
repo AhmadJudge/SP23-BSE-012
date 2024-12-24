@@ -1,0 +1,174 @@
+html{
+    width: 100;
+}
+
+
+@media (max-width: 320px) {
+    html{
+        width: 112%;
+    }
+}
+
+      /* Ensuring the search bar is centered */
+      @media (min-width: 992px) {
+        .search-bar-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+    hr {
+        border-color: #000;
+    }
+    /* Custom styles for carousel */
+    .carousel {
+        height: 67vh; /* Full height for carousel */
+    }
+    .carousel-item {
+        height: 100%; /* Ensure carousel items take full height */
+    }
+    .carousel-item img {
+        height: 100%; /* Ensure images fill the height */
+        object-fit: cover; /* Cover aspect ratio */
+    }
+
+    /* Removing gap between sections */
+    .carousel + .whats-new-container {
+        margin-top: 0; /* Removing the top margin */
+        padding-top: 0; /* Removing the top padding */
+    }
+
+    /* Circular images */
+    .circle-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    /* Slider for the row */
+    .whats-new-row {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        scroll-behavior: smooth;
+    }
+
+    .whats-new-row .col-md-2 {
+        flex: 0 0 auto;
+    }
+    
+    .whats-new-row::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for aesthetics */
+    }
+
+.cen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.category-title {
+    text-align: center;
+    font-weight: bold;
+    margin: 20px 0;
+}
+.category-item img {
+    width: 100%;
+    height: auto;
+}
+.category-item p {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.container p{
+    overflow: hidden;
+}
+
+.shop-category1 {
+    text-align: center;
+    padding: 60px 0;
+  }
+  
+  .shop-category1 h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+  }
+  
+  .categories1 {
+    display: flex;
+    justify-content: center;
+    gap: 53px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-width: 1285px;
+  }
+  
+  .category-item1 {
+    width: 280px;
+    text-align: center;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .category-item1 .category-img {
+    margin-left: -24px;
+    width: 327px;
+    height: 373px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .category-item1 p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+    letter-spacing: 1px;
+  }
+  
+  .category-item1:hover img {
+    transform: scale(1.05);
+  }
+  .col1{
+    text-align: left;
+    font-size: 0.8em;
+  }
+  
+  
+  .col2{
+    margin-top: -73px;
+    margin-left: 140px;
+  }
+  .col2 button {
+    padding: 11px;
+      padding-left: 30px;
+      background-color: black;
+      color: white;
+      border-radius: 13px;
+      padding-right: 30px;
+   
+  }
+  .col2 button:hover{
+  
+    color: #007bff;
+    transition: 0.3s;
+  }
+  
+  
+  
+  #imgmid{
+    height: 80%;
+    width: 84%;
+}
+.square-image {
+  width: 100%;          /* Full width to fit the column */
+  aspect-ratio: 1 / 1;  /* Ensures a 1:1 aspect ratio (square) */
+  object-fit: fill;    /* Ensures the image fills the square without distortion */
+}
+
+
+
+.lia ul li a{
+  margin-top: 10px;
+}

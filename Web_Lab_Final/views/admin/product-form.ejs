@@ -1,0 +1,96 @@
+<h4 class="text-center my-4">Create New Product</h4>
+<p class="text-muted text-center">
+  If the action attribute is empty, the form will be submitted to the same URL on which it's rendered. The default submission method is GET.
+</p>
+<form action="" class="container mt-4 p-4 bg-light shadow rounded" method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      id="title"
+      name="title"
+      type="text"
+      class="form-control"
+      placeholder="Enter product title"
+      value="hehe"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      id="description"
+      name="description"
+      class="form-control"
+      rows="4"
+      placeholder="Enter product description"
+      required
+    >This is your hero</textarea>
+  </div>
+
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input
+      id="price"
+      name="price"
+      type="number"
+      class="form-control"
+      placeholder="Enter product price"
+      value="200"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="file" class="form-label">Picture</label>
+    <input
+      id="file"
+      name="file"
+      type="file"
+      class="form-control"
+      accept="image/*"
+    />
+  </div>
+
+  <div class="form-check mb-3">
+    <input
+      id="isFeatured"
+      name="isFeatured"
+      type="checkbox"
+      class="form-check-input"
+    />
+    <label class="form-check-label" for="isFeatured">Featured?</label>
+  </div>
+
+  <div class="mb-3">
+    <label for="category" class="form-label">Category</label>
+    <select
+      id="category"
+      name="category"
+      class="form-select"
+      required
+    >
+      <% categories.forEach(category => { %>
+        <option value="<%= category._id %>"><%= category.title %></option>
+      <% }); %>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="gender" class="form-label">Gender</label>
+    <select
+      id="gender"
+      name="gender"
+      class="form-select"
+      required
+    >
+      <option value="men">Men</option>
+      <option value="women">Women</option>
+      <option value="children">Children</option>
+    </select>
+  </div>
+
+  <div class="d-grid">
+    <button class="btn btn-primary">Create Record</button>
+  </div>
+</form>

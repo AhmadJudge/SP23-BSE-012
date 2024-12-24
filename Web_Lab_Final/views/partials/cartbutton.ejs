@@ -1,0 +1,97 @@
+<div id="floating-cart-container">
+    <a href="/cart" class="floating-cart-button">
+        <i class="fas fa-shopping-cart"></i>
+        <% if (locals.cartItemsCount && cartItemsCount > 0) { %>
+            <span class="cart-badge"><%= cartItemsCount %></span>
+        <% } %>
+    </a>
+</div>
+
+<style>
+    /* Floating Cart Button */
+    .floating-cart-button {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: linear-gradient(135deg, #b61c1c, #0056b3);
+        color: #fff;
+        border-radius: 50%;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .floating-cart-button:hover {
+        background: linear-gradient(135deg, #0056b3, #8a1111);
+        transform: translateY(-10px) scale(1.15);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .floating-cart-button:active {
+        transform: scale(0.95);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .floating-cart-button i {
+        font-size: 28px;
+        transition: transform 0.2s ease;
+    }
+
+    .floating-cart-button:hover i {
+        transform: rotate(20deg);
+    }
+
+    /* Badge for Item Count */
+    .cart-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: radial-gradient(circle, red, darkred);
+        color: white;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: bold;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Floating Animation */
+    .floating-cart-button {
+        animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cartButton = document.querySelector('.floating-cart-button');
+        
+        cartButton.addEventListener('click', function() {
+            // Add a subtle animation on click
+            cartButton.classList.add('clicked');
+            setTimeout(() => cartButton.classList.remove('clicked'), 300);
+        });
+    });
+</script>

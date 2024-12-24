@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Users</title>
+
+    <style>
+        table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 5px 10px;
+    margin: 2px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+form {
+    display: inline-block;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Unapproved Users</h1>
+
+    <% if (users.length === 0) { %>
+        <p>No unapproved users found.</p>
+    <% } else { %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td><%= user.username %></td>
+                        <td><%= user.email %></td>
+                        <td>
+                            <form action="/superadmin/approve/<%= user._id %>" method="POST" style="display: inline;">
+                                <button type="submit">Approve</button>
+                            </form>
+                            <form action="/superadmin/disapprove/<%= user._id %>" method="POST" style="display: inline;">
+                                <button type="submit">Disapprove</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } %>
+</body>
+</html>
